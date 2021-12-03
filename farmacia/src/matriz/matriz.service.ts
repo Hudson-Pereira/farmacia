@@ -26,6 +26,6 @@ export class MatrizService {
 
   remove(id: number) {
     delete matriz[id];
-    return `This action removes a #${id} matriz`;
+    return `Dados deletados.`;
   }
 }
