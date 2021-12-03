@@ -2,25 +2,30 @@ import { Injectable } from '@nestjs/common';
 import { CreateFilialDto } from './dto/create-filial.dto';
 import { UpdateFilialDto } from './dto/update-filial.dto';
 
+const filiais = [];
+
 @Injectable()
 export class FilialService {
   create(createFilialDto: CreateFilialDto) {
-    return 'This action adds a new filial';
+    filiais.push(createFilialDto);
+    return 'Filial adicionada com sucesso.';
   }
 
   findAll() {
-    return `This action returns all filial`;
+    return filiais;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} filial`;
+    return filiais[id];
   }
 
   update(id: number, updateFilialDto: UpdateFilialDto) {
-    return `This action updates a #${id} filial`;
+    filiais[id] = updateFilialDto;
+    return `Filial ${updateFilialDto.nome} alterada.`;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} filial`;
+    delete filiais[id];
+    return `Filial removida.`;
   }
 }
