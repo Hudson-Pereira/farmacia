@@ -1,4 +1,4 @@
-import { IsInt, IsNotEmpty, IsString, ValidateIf } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateFilialDto {
   @IsNotEmpty()
@@ -17,7 +17,6 @@ export class CreateFilialDto {
   @IsString()
   end: string;
 
-  @IsNotEmpty()
   @IsString()
   funcionamento: string;
 
@@ -30,6 +29,6 @@ export class CreateFilialDto {
   telefone: number;
 
   @IsNotEmpty()
-  @IsString()
-  matriz: string;
+  @IsInt()
+  matriz: number;
 }

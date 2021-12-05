@@ -17,7 +17,6 @@ export class CreateMatrizDto {
   @IsString()
   end: string;
 
-  @IsNotEmpty()
   @IsString()
   funcionamento: string;
 
@@ -28,8 +27,4 @@ export class CreateMatrizDto {
   @IsNotEmpty()
   @IsInt()
   telefone: number;
-
-  @IsNotEmpty()
-  @IsString()
-  filiais: string;
 }

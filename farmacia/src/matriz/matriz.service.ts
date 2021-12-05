@@ -1,31 +1,33 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from './../prisma/prisma.service';
+import { Matriz } from '@prisma/client';
 import { CreateMatrizDto } from './dto/create-matriz.dto';
 import { UpdateMatrizDto } from './dto/update-matriz.dto';
 
-const matriz = [];
-
 @Injectable()
 export class MatrizService {
-  create(createMatrizDto: CreateMatrizDto) {
-    matriz.push(createMatrizDto);
-    return 'Matriz adicionada.';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createMatrizDto: CreateMatrizDto): Promise<Matriz> {
+    return await this.prisma.matriz.create({ data: { ...createMatrizDto } });
   }
 
-  findAll() {
-    return matriz;
+  async findAll(): Promise<Matriz[]> {
+    return await this.prisma.matriz.findMany();
   }
 
-  findOne(id: number) {
-    return matriz[id];
+  async findOne(id: number): Promise<Matriz> {
+    return await this.prisma.matriz.findUnique({ where: { id } });
   }
 
-  update(id: number, updateMatrizDto: UpdateMatrizDto) {
-    matriz[id] = updateMatrizDto;
-    return `Dados alterados.`;
+  async update(id: number, updateMatrizDto): Promise<Matriz> {
+    return await this.prisma.matriz.update({
+      data: { ...updateMatrizDto },
+      where: { id },
+    });
   }
 
-  remove(id: number) {
-    delete matriz[id];
-    return `Dados deletados.`;
+  async remove(id: number) {
+    return await this.prisma.matriz.delete({ where: { id } });
   }
 }
