@@ -9,7 +9,7 @@ datasource db {
 }
 
 model Matriz { 
-  id                    Int         @default(autoincrement()) @id
+  id                    Int         @default(autoincrement()) @id 
   logo                  String
   nome                  String      @unique
   cnpj                  Int         @unique
@@ -18,7 +18,6 @@ model Matriz {
   responsavel           String
   telefone              Int
   filiais               Filial[]
-  produtos              Produto[]
   
 }
 
@@ -30,7 +29,7 @@ model Filial {
   end                   String
   funcionamento         String?
   responsavel           String
-  telefone              Int
+  telefone              Int       
   matriz                Matriz     @relation(fields: [matrizId], references: [id])
   matrizId              Int
 
@@ -45,7 +44,5 @@ model Produto {
   disponibilidade       Boolean
   volume                Int
   fabricante            String
-  matriz                Matriz     @relation(fields: [matrizId], references: [id])
-  matrizId              Int
 
 }

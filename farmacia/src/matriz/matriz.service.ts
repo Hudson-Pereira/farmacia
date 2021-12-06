@@ -9,7 +9,10 @@ export class MatrizService {
   constructor(private prisma: PrismaService) {}
 
   async create(createMatrizDto: CreateMatrizDto): Promise<Matriz> {
-    return await this.prisma.matriz.create({ data: { ...createMatrizDto } });
+    const total = await this.prisma.matriz.findMany();
+    if (total.length < 1) {
+      return await this.prisma.matriz.create({ data: { ...createMatrizDto } });
+    }
   }
 
   async findAll(): Promise<Matriz[]> {

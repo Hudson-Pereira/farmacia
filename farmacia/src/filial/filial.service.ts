@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpCode, Injectable } from '@nestjs/common';
 import { PrismaService } from './../prisma/prisma.service';
 import { Filial } from '@prisma/client';
 import { CreateFilialDto } from './dto/create-filial.dto';
@@ -10,7 +10,10 @@ export class FilialService {
   constructor(private prisma: PrismaService) {}
 
   async create(createFilialDto: CreateFilialDto): Promise<Filial> {
-    return await this.prisma.filial.create({ data: { ...createFilialDto } });
+    const total = await this.prisma.filial.findMany();
+    if (total.length < 3) {
+      return await this.prisma.filial.create({ data: { ...createFilialDto } });
+    }
   }
 
   async findAll(): Promise<Filial[]> {

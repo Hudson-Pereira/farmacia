@@ -30,5 +30,5 @@ export class CreateFilialDto {
 
   @IsNotEmpty()
   @IsInt()
-  matriz: number;
+  matrizId: number;
 }
